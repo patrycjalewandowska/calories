@@ -9,8 +9,7 @@ namespace apkakalorie.Models
     public class DailySummary
     {
         public DateTime Date { get; set; }
-        public int UserId { get; set; }
-
+       
         public double TotalCalories { get; set; }
         public double TotalProtein { get; set; }
         public double TotalFat { get; set; }

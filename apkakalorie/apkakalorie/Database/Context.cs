@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace apkakalorie.Database
 {
-    internal class Context
+    public class Context
     {
         public List<Recipe> recipes = new List<Recipe>();
+        public List<Product> products = new List<Product>();
     }
 }
