@@ -13,5 +13,29 @@ namespace apkakalorie.Service
 
         
         }
+
+        public void DeleteRecipe()
+        {
+
+
+        }
+
+        public void GetRecipeById()
+        {
+
+
+        }
+
+        public void GetAllRecipe()
+        {
+
+
+        }
+
+        public void UpdateRecipe()
+        {
+
+
+        }
     }
 }
