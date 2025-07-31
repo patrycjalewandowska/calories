@@ -1,4 +1,6 @@
-﻿using System;
+﻿using apkakalorie.Database;
+using apkakalorie.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,11 @@ namespace apkakalorie.Service
 {
     internal class ServiceRecipe
     {
+        private readonly Context _context;
+        public ServiceRecipe(Context context)
+        {
+            _context = context;
+        }
         public void AddNewRecipe() 
         {
 
@@ -20,15 +27,24 @@ namespace apkakalorie.Service
 
         }
 
-        public void GetRecipeById()
+        public Recipe GetRecipeById(int id)
         {
+            Recipe recipe = new Recipe();
+            foreach (var item in _context.recipes)
+            {
+                if (item.Id == id)
+                {
 
-
+                    recipe = item;
+                    return recipe;
+                }
+            }
+            return null;
         }
 
-        public void GetAllRecipe()
+        public List<Recipe> GetAllRecipe()
         {
-
+            return _context.recipes;
 
         }
 
