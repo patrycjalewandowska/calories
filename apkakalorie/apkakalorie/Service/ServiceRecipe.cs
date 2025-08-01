@@ -15,9 +15,9 @@ namespace apkakalorie.Service
         {
             _context = context;
         }
-        public void AddNewRecipe() 
+        public void AddNewRecipe(Recipe recipe) 
         {
-
+           _contex.recipe.Add(recipe);
         
         }
 
@@ -35,9 +35,7 @@ namespace apkakalorie.Service
       Console.WriteLine("Taki przepis nie istneje");
 
 }
-
-         
-        }
+           }
 
         public Recipe GetRecipeById(int id)
         {
@@ -46,7 +44,6 @@ namespace apkakalorie.Service
             {
                 if (item.Id == id)
                 {
-
                     recipe = item;
                     return recipe;
                 }
@@ -60,8 +57,11 @@ namespace apkakalorie.Service
 
         }
 
-        public void UpdateRecipe()
-        {
+        public void UpdateRecipe(Recipe recipeNew)
+       {
+           Recipe recipe = new Recipe();
+recipe = GetRecipeById (recipeNew.id);
+recipe.Name =recipeNew.Name; //składniki 
 
 
         }
