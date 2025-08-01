@@ -21,10 +21,22 @@ namespace apkakalorie.Service
         
         }
 
-        public void DeleteRecipe()
+        public void DeleteRecipe(int id)
         {
+          Recipe recipe = new Recipe();
+          recipe =  GetRecipeById(id)
 
+         if (recipe != null)
+{
 
+        _context.recipes.RemoveAt(id);
+}
+        else {
+      Console.WriteLine("Taki przepis nie istneje");
+
+}
+
+         
         }
 
         public Recipe GetRecipeById(int id)
