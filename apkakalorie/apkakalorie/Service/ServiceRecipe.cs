@@ -37,6 +37,9 @@ namespace apkakalorie.Service
 }
            }
 
+public List<Recipe> GetRecipeByName(string name)
+
+
         public Recipe GetRecipeById(int id)
         {
             Recipe recipe = new Recipe();
