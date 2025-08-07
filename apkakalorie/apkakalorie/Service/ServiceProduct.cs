@@ -12,12 +12,14 @@ namespace apkakalorie.Service
     {
         private int id = 0;
 
-        private readonly Context _context;
+        private  Context _context;
 
-        public ServiceProduct(Context context)
-        {
-            _context = context;
-        }
+        //private readonly Context _context;
+
+        /*   public ServiceProduct(Context context)
+           {
+               _context = context;
+           }*/
         public void AddNewProduct(Product product) 
         {
             Product newProduct = new Product();
@@ -60,7 +62,10 @@ namespace apkakalorie.Service
 
         public List<Product> GetAllProduct()
         {
-
+            if (_context.products == null)
+            {
+                Console.WriteLine("LISTA PRODUKTOW JEST PUSTA");
+            }
             return _context.products;
         }
 
