@@ -15,58 +15,57 @@ namespace apkakalorie.Service
         {
             _context = context;
         }
-        public void AddNewRecipe(Recipe recipe) 
+        public void AddNewRecipe(Recipe recipe)
         {
-           _contex.recipe.Add(recipe);
-        
+            _context.recipes.Add(recipe);
+
         }
 
         public void DeleteRecipe(int id)
         {
-          Recipe recipe = new Recipe();
-          recipe =  GetRecipeById(id)
-
-         if (recipe != null)
-{
-
-        _context.recipes.RemoveAt(id);
-}
-        else {
-      Console.WriteLine("Taki przepis nie istneje");
-
-}
-           }
-
-public List<Recipe> GetRecipeByName(string name)
-
-
-        public Recipe GetRecipeById(int id)
-        {
             Recipe recipe = new Recipe();
-            foreach (var item in _context.recipes)
+            recipe = GetRecipeById(id);
+
+            if (recipe != null)
             {
-                if (item.Id == id)
-                {
-                    recipe = item;
-                    return recipe;
-                }
+
+                _context.recipes.RemoveAt(id);
             }
-            return null;
+            else {
+                Console.WriteLine("Taki przepis nie istneje");
+
+            }
         }
 
-        public List<Recipe> GetAllRecipe()
-        {
-            return _context.recipes;
+    //    public List<Recipe> GetRecipeByName(string name){   }
+        public Recipe GetRecipeById(int id)
+            {
+                Recipe recipe = new Recipe();
+                foreach (var item in _context.recipes)
+                {
+                    if (item.Id == id)
+                    {
+                        recipe = item;
+                        return recipe;
+                    }
+                }
+                return null;
+            }
 
-        }
+            public List<Recipe> GetAllRecipe()
+            {
+                return _context.recipes;
 
-        public void UpdateRecipe(Recipe recipeNew)
-       {
-           Recipe recipe = new Recipe();
-recipe = GetRecipeById (recipeNew.id);
-recipe.Name =recipeNew.Name; //składniki 
+            }
+
+            public void UpdateRecipe(Recipe recipeNew)
+            {
+                Recipe recipe = new Recipe();
+                recipe = GetRecipeById(recipeNew.Id);
+                recipe.Name = recipeNew.Name; //składniki 
 
 
-        }
+            }
+        
     }
 }
