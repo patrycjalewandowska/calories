@@ -69,7 +69,7 @@ while (true)
         case 1: ProductConsoleUI.ShowAllProducts(productService); break;
         case 2: ProductConsoleUI.CreateProductFromUserInput(productService);  break;
         case 3: Console.WriteLine("update"); break;
-        case 4: Console.WriteLine("usun"); break;
+        case 4: ProductConsoleUI.DeleteProductById(productService);   break;
         case 5: Console.WriteLine("powrot"); break;
         default:
             Console.WriteLine("Brak dostepnego Menu"); break;

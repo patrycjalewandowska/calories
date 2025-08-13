@@ -42,10 +42,23 @@ namespace apkakalorie.ConsoleUI
                 return;
             }
 
+            Console.WriteLine("Zapisane produkty");
+
             foreach (var p in products)
             {
                 Console.WriteLine($"{p.Id}: {p.Name} - {p.CaloriesPer100g} kcal");
             }
+        }
+
+        public static void DeleteProductById(ServiceProduct productService)
+        {
+            Product p = new Product();
+
+            Console.WriteLine("Ktory produkt chcesz usunac?");
+            string productIdInput = Console.ReadLine();
+            Int32.TryParse(productIdInput, out int productId);
+
+            productService.DeleteProduct(productId);
         }
 
         private static double ReadDoubleFromUser()
