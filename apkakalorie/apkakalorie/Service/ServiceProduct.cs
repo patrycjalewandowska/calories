@@ -16,10 +16,10 @@ namespace apkakalorie.Service
 
         //private readonly Context _context;
 
-        /*   public ServiceProduct(Context context)
+        public ServiceProduct(Context context)
            {
                _context = context;
-           }*/
+           }
         public void AddNewProduct(Product product) 
         {
             Product newProduct = new Product();
@@ -32,7 +32,9 @@ namespace apkakalorie.Service
 
             _context.products.Add(newProduct);
 
-    }
+            Console.WriteLine("DODANO NOWY PRODUKT");
+
+        }
 
         public int GenereteNewProductId()
         {
@@ -60,7 +62,7 @@ namespace apkakalorie.Service
             return _context.products.FirstOrDefault(p=> p.Id == id);
         }
 
-        public List<Product> GetAllProduct()
+        public List<Product> GetAllProducts()
         {
             if (_context.products == null)
             {

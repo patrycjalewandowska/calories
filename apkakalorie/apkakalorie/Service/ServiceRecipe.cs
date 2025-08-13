@@ -11,10 +11,10 @@ namespace apkakalorie.Service
     internal class ServiceRecipe
     {
         private  Context _context;
-  /*      public ServiceRecipe(Context context)
+         public ServiceRecipe(Context context)
         {
             _context = context;
-        }*/
+        }
         public void AddNewRecipe(Recipe recipe)
         {
             _context.recipes.Add(recipe);

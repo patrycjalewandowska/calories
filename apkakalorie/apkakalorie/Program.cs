@@ -1,6 +1,9 @@
 ﻿using apkakalorie.Database;
 using apkakalorie.Models;
 using apkakalorie.Service;
+using apkakalorie.ConsoleUI;
+
+Context context = new Context();
 
 ServiceMenu listOptionMenu = new ServiceMenu();
 
@@ -23,8 +26,8 @@ listProductMenu.AddMenuToList(3, "Zaktualizuj produkt");
 listProductMenu.AddMenuToList(4, "Usun produkt");
 listProductMenu.AddMenuToList(5, "Powrot");
 
-ServiceProduct productService = new ServiceProduct();
-ServiceRecipe recipeService = new ServiceRecipe();
+ServiceProduct productService = new ServiceProduct(context);
+ServiceRecipe recipeService = new ServiceRecipe(context);
 
 int number = 0;
 
@@ -48,8 +51,7 @@ while (true)
     {
         switch (inputNumber)
         {
-            case 1:
-                recipeService.GetAllRecipe(); break;
+            case 1: recipeService.GetAllRecipe(); break;
             case 2: Console.WriteLine("dodaj"); break;
             case 3: Console.WriteLine("update"); break;
             case 4: Console.WriteLine("usun"); break;
@@ -64,53 +66,14 @@ while (true)
         switch (inputNumber)
         {
 
-        case 1:
-           productService.GetAllProduct(); break;
-        case 2: AddProduct(productService); break;
+        case 1: ProductConsoleUI.ShowAllProducts(productService); break;
+        case 2: ProductConsoleUI.CreateProductFromUserInput(productService);  break;
         case 3: Console.WriteLine("update"); break;
         case 4: Console.WriteLine("usun"); break;
         case 5: Console.WriteLine("powrot"); break;
         default:
             Console.WriteLine("Brak dostepnego Menu"); break;
 
-        }
-    }
-}
-
-void AddProduct(ServiceProduct productService)
-{
-    Product p = new Product();
-
-    Console.WriteLine("Podaj nazwę produktu:");
-    p.Name = Console.ReadLine();
-
-    Console.WriteLine("Podaj kalorie na 100g:");
-    p.CaloriesPer100g = ReadDoubleFromUser();
-
-    Console.WriteLine("Podaj białko na 100g:");
-    p.ProteinPer100g = ReadDoubleFromUser();
-
-    Console.WriteLine("Podaj tłuszcz na 100g:");
-    p.FatPer100g = ReadDoubleFromUser();
-
-    Console.WriteLine("Podaj węglowodany na 100g:");
-    p.CarbsPer100g = ReadDoubleFromUser();
-
-    productService.AddNewProduct(p);
-}
-
-double ReadDoubleFromUser()
-{
-    while (true)
-    {
-        string input = Console.ReadLine();
-        if (Double.TryParse(input, out double value))
-        {
-            return value;
-        }
-        else
-        {
-            Console.WriteLine("Niepoprawna liczba. Spróbuj ponownie:");
         }
     }
 }
