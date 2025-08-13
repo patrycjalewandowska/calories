@@ -53,7 +53,7 @@ while (true)
 
         case 1: ProductConsoleUI.ShowAllProducts(productService); break;
         case 2: ProductConsoleUI.CreateProductFromUserInput(productService);  break;
-        case 3: Console.WriteLine("update"); break;
+        case 3: ProductConsoleUI.UpdateProductFromUserInput(productService);  break;
         case 4: ProductConsoleUI.DeleteProductById(productService);   break;
         case 5: ShowSubMenu(listOptionMenu); break;
         default:

@@ -71,16 +71,17 @@ namespace apkakalorie.Service
             return _context.products;
         }
 
-        public void UpdateProduct(int id)
+        public void UpdateProduct(int id, Product updateProduct)
         {
             Product product = GetProduct(id);
-            Product updateProduct = new Product();
             updateProduct.Id = id;
             updateProduct.Name = product.Name;
             updateProduct.CaloriesPer100g = product.CaloriesPer100g;
             updateProduct.ProteinPer100g = product.ProteinPer100g;
             updateProduct.FatPer100g = product.FatPer100g;
             updateProduct.CarbsPer100g = product.CarbsPer100g;
+
+            Console.WriteLine("Zapisowano produkt");
 
         }
 

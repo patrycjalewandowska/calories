@@ -42,7 +42,7 @@ namespace apkakalorie.ConsoleUI
                 return;
             }
 
-            Console.WriteLine("Zapisane produkty");
+            Console.WriteLine("Dostępne produkty");
 
             foreach (var p in products)
             {
@@ -55,10 +55,43 @@ namespace apkakalorie.ConsoleUI
             Product p = new Product();
 
             Console.WriteLine("Ktory produkt chcesz usunac?");
-            string productIdInput = Console.ReadLine();
-            Int32.TryParse(productIdInput, out int productId);
+
+            int productId = GetIdFromUser();
 
             productService.DeleteProduct(productId);
+        }
+
+        public static void UpdateProductFromUserInput(ServiceProduct productService)
+        {
+
+            Product p = new Product();
+
+            Console.WriteLine("Ktory produkt chce aktualizowac?");
+            ProductConsoleUI.ShowAllProducts();
+            int productId = GetIdFromUser();
+
+            Product productFromDb = new Product();
+
+            productFromDb = productService.GetProduct(productId);
+
+
+
+            Console.WriteLine("Podaj nazwę produktu:");
+            p.Name = Console.ReadLine();
+
+            Console.WriteLine("Podaj kalorie na 100g:");
+            p.CaloriesPer100g = ReadDoubleFromUser();
+
+            Console.WriteLine("Podaj białko na 100g:");
+            p.ProteinPer100g = ReadDoubleFromUser();
+
+            Console.WriteLine("Podaj tłuszcz na 100g:");
+            p.FatPer100g = ReadDoubleFromUser();
+
+            Console.WriteLine("Podaj węglowodany na 100g:");
+            p.CarbsPer100g = ReadDoubleFromUser();
+
+            productService.UpdateProduct(productId, p);
         }
 
         private static double ReadDoubleFromUser()
@@ -70,6 +103,15 @@ namespace apkakalorie.ConsoleUI
                     return value;
                 Console.WriteLine("Nieprawidłowa wartość. Spróbuj ponownie:");
             }
+        }
+
+        private static int GetIdFromUser()
+        {
+            string productIdInput = Console.ReadLine();
+            Int32.TryParse(productIdInput, out int productId);
+            return productId;
+
+
         }
     }   
 }
