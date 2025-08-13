@@ -22,7 +22,7 @@ while (true)
 
     switch (numerMenu)
     {
-        case 1: ShowSubMenu(listRecipeMenu, recipeService: recipeService); break;
+        case 1: ShowSubMenu(listRecipeMenu, recipeService: recipeService, productService: productService); break;
         case 2: ShowSubMenu(listProductMenu, productService: productService); break;
         default:Console.WriteLine("Brak dostepnego Menu"); break;
     };
@@ -36,15 +36,14 @@ while (true)
     {
         switch (inputNumber)
         {
-            case 1: recipeService.GetAllRecipe(); break;
-            case 2: Console.WriteLine("dodaj"); break;
+            case 1: RecipeConsoleUI.GetAllRecipe(recipeService); break;
+            case 2: RecipeConsoleUI.CreateRecipe(recipeService, productService); break;
             case 3: Console.WriteLine("update"); break;
             case 4: Console.WriteLine("usun"); break;
             case 5: ShowSubMenu(listOptionMenu); break;
             default:
                 Console.WriteLine("Brak dostepnego Menu"); break;
         }
-
     }
     else 
     {

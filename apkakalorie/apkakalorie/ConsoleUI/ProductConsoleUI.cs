@@ -67,13 +67,15 @@ namespace apkakalorie.ConsoleUI
             Product p = new Product();
 
             Console.WriteLine("Ktory produkt chce aktualizowac?");
-            ProductConsoleUI.ShowAllProducts();
+            ShowAllProducts(productService);
+
             int productId = GetIdFromUser();
 
             Product productFromDb = new Product();
 
             productFromDb = productService.GetProduct(productId);
 
+            ShowProduct(productFromDb);
 
 
             Console.WriteLine("Podaj nazwę produktu:");
@@ -112,6 +114,16 @@ namespace apkakalorie.ConsoleUI
             return productId;
 
 
+        }
+
+        private static void ShowProduct(Product productFromDb)
+        {
+            Console.WriteLine($"Id: {productFromDb.Id}," +
+                $"Name: {productFromDb.Name}," +
+                $"kalorie na 100g: {productFromDb.CaloriesPer100g}," +
+                $"białko na 100g: {productFromDb.ProteinPer100g}," +
+                $"węglowodany na 100g: {productFromDb.CarbsPer100g}," +
+                $"tłuszcz na 100g: {productFromDb.FatPer100g}");
         }
     }   
 }

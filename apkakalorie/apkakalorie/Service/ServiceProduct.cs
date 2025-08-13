@@ -41,7 +41,6 @@ namespace apkakalorie.Service
             id++;
             return id;
         }
-
         public void DeleteProduct(int id)
         {
             var product = _context.products.FirstOrDefault(p => p.Id == id);

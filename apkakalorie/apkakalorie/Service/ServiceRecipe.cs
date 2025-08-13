@@ -8,17 +8,50 @@ using System.Threading.Tasks;
 
 namespace apkakalorie.Service
 {
-    internal class ServiceRecipe
+    public class ServiceRecipe
     {
         private  Context _context;
+        private int id = 0;
          public ServiceRecipe(Context context)
         {
             _context = context;
         }
-        public void AddNewRecipe(Recipe recipe)
-        {
-            _context.recipes.Add(recipe);
 
+        public int GenereteNewRecipeId()
+        {
+            id++;
+            return id;
+        }
+
+        public void AddNewRecipe(Recipe recipe, List<RecipeItem> listIdProductToRecipe)
+        {
+            ServiceProduct serviceProduct = new ServiceProduct(_context);
+            Recipe r = new Recipe();
+            List<Product> allProducts = serviceProduct.GetAllProducts();
+
+            for (int i = 0; i < allProducts.Count; i++)
+            {
+                foreach (var item in listIdProductToRecipe)
+                {
+                    if (item.ProductId == allProducts[i].Id)
+                    {
+                        r.CaloricContent += allProducts[i].CaloriesPer100g * item.Quantity / 100;
+                        r.Protein += allProducts[i].ProteinPer100g * item.Quantity / 100; ;
+                        r.Fat += allProducts[i].FatPer100g * item.Quantity / 100; ;
+                        r.Carbs += allProducts[i].CarbsPer100g * item.Quantity / 100; ;
+                    }
+                }
+            }
+
+            r.Id = GenereteNewRecipeId();
+            r.listIdProductToRecipe = listIdProductToRecipe;
+            r.Description = recipe.Description;
+            r.Name = recipe.Name;
+            r.NumberOfServings = recipe.NumberOfServings;
+
+            _context.recipes.Add(r);
+
+            Console.WriteLine("Dodano przepis");
         }
 
         public void DeleteRecipe(int id)
