@@ -41,7 +41,6 @@ namespace apkakalorie.ConsoleUI
             recipe.NumberOfServings = ReadIntFromUser();
 
             recipeService.AddNewRecipe(recipe, listIdProductToRecipe);
-
         }
 
         public static void GetAllRecipe(ServiceRecipe recipeService)
@@ -54,7 +53,6 @@ namespace apkakalorie.ConsoleUI
                 Console.WriteLine($"Nazwa: {recipe.Name}");
                 Console.WriteLine($"Kalorie: {recipe.CaloricContent}");
                 Console.WriteLine($"Przygotowanie: {recipe.Description}");
-                
             }
         }
 
@@ -64,6 +62,13 @@ namespace apkakalorie.ConsoleUI
             string input = Console.ReadLine();
             Int32.TryParse( input, out int id);
             recipeService.DeleteRecipe(id);
+        }
+
+        public static void UpdateRecipeFromUser()
+        { 
+            //menu change produkt -> edit produkt
+            //menu change usunac produkt
+            //menu dodac produkt        
         }
 
         private static double ReadDoubleFromUser()
@@ -86,7 +91,6 @@ namespace apkakalorie.ConsoleUI
                     return value;
                 Console.WriteLine("Nieprawidłowa wartość. Spróbuj ponownie:");
             }
-
 
         }
 

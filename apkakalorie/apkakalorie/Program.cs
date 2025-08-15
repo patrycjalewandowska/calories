@@ -41,6 +41,7 @@ while (true)
             case 3: Console.WriteLine("update"); break;
             case 4: RecipeConsoleUI.DeleteRecipeWithIdFromUser(recipeService); break;
             case 5: ShowSubMenu(listOptionMenu); break;
+            case 6: Console.WriteLine("szukaj przepisu konkretnego po id"); break;
             default:
                 Console.WriteLine("Brak dostepnego Menu"); break;
         }
