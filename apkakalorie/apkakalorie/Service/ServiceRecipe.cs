@@ -61,12 +61,10 @@ namespace apkakalorie.Service
 
             if (recipe != null)
             {
-
                 _context.recipes.RemoveAt(id);
             }
             else {
                 Console.WriteLine("Taki przepis nie istneje");
-
             }
         }
 

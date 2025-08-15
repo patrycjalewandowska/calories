@@ -39,7 +39,7 @@ while (true)
             case 1: RecipeConsoleUI.GetAllRecipe(recipeService); break;
             case 2: RecipeConsoleUI.CreateRecipe(recipeService, productService); break;
             case 3: Console.WriteLine("update"); break;
-            case 4: Console.WriteLine("usun"); break;
+            case 4: RecipeConsoleUI.DeleteRecipeWithIdFromUser(recipeService); break;
             case 5: ShowSubMenu(listOptionMenu); break;
             default:
                 Console.WriteLine("Brak dostepnego Menu"); break;

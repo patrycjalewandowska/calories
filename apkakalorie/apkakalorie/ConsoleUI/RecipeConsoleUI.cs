@@ -56,7 +56,14 @@ namespace apkakalorie.ConsoleUI
                 Console.WriteLine($"Przygotowanie: {recipe.Description}");
                 
             }
-        
+        }
+
+        public static void DeleteRecipeWithIdFromUser(ServiceRecipe recipeService)
+        {
+            Console.WriteLine("Podaj id przepiu ktorego chcesz usunac");
+            string input = Console.ReadLine();
+            Int32.TryParse( input, out int id);
+            recipeService.DeleteRecipe(id);
         }
 
         private static double ReadDoubleFromUser()
