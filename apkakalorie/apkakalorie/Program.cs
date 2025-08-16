@@ -8,6 +8,7 @@ Context context = new Context();
 ServiceMenu listOptionMenu = new ServiceMenu();
 ServiceMenu listRecipeMenu = new ServiceMenu();
 ServiceMenu listProductMenu = new ServiceMenu();
+ServiceMenu listMenuProductInRecipe = new ServiceMenu();
 
 AddAllMenu(listOptionMenu, listRecipeMenu, listProductMenu);
 
@@ -38,7 +39,7 @@ while (true)
         {
             case 1: RecipeConsoleUI.GetAllRecipe(recipeService); break;
             case 2: RecipeConsoleUI.CreateRecipe(recipeService, productService); break;
-            case 3: Console.WriteLine("update"); break;
+            case 3: RecipeConsoleUI.UpdateRecipeFromUser(recipeService, listMenuProductInRecipe, productService); break; 
             case 4: RecipeConsoleUI.DeleteRecipeWithIdFromUser(recipeService); break;
             case 5: ShowSubMenu(listOptionMenu); break;
             case 6: Console.WriteLine("szukaj przepisu konkretnego po id"); break;
@@ -80,4 +81,10 @@ while (true)
     listProductMenu.AddMenuToList(3, "Zaktualizuj produkt");
     listProductMenu.AddMenuToList(4, "Usun produkt");
     listProductMenu.AddMenuToList(5, "Powrot");
+
+
+    listMenuProductInRecipe.AddMenuToList(1, "Zmiana przepisu");
+    listMenuProductInRecipe.AddMenuToList(2, "Dodanie produktow");
+    listMenuProductInRecipe.AddMenuToList(3, "Usuniecie produktow");
+    listMenuProductInRecipe.AddMenuToList(4, "Aktualizacja produktu?????");
 }

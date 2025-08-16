@@ -46,7 +46,7 @@ namespace apkakalorie.ConsoleUI
 
             foreach (var p in products)
             {
-                Console.WriteLine($"{p.Id}: {p.Name} - {p.CaloriesPer100g} kcal");
+                ShowProductShort(p);             
             }
         }
 
@@ -66,7 +66,7 @@ namespace apkakalorie.ConsoleUI
 
             Product p = new Product();
 
-            Console.WriteLine("Ktory produkt chce aktualizowac?");
+            Console.WriteLine("Ktory produkt chcesz aktualizowac?");
             ShowAllProducts(productService);
 
             int productId = GetIdFromUser();
@@ -96,6 +96,7 @@ namespace apkakalorie.ConsoleUI
             productService.UpdateProduct(productId, p);
         }
 
+
         private static double ReadDoubleFromUser()
         {
             while (true)
@@ -107,14 +108,18 @@ namespace apkakalorie.ConsoleUI
             }
         }
 
+        public static void ShowProductShort(Product product)
+        {
+                Console.WriteLine($"{product.Id}: {product.Name} - {product.CaloriesPer100g} kcal");
+        }
+
         private static int GetIdFromUser()
         {
             string productIdInput = Console.ReadLine();
             Int32.TryParse(productIdInput, out int productId);
             return productId;
-
-
         }
+
 
         private static void ShowProduct(Product productFromDb)
         {

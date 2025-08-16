@@ -83,18 +83,18 @@ namespace apkakalorie.Service
                 return null;
             }
 
-            public List<Recipe> GetAllRecipe()
+        public List<Recipe> GetAllRecipe()
             {
                 return _context.recipes;
 
             }
 
-            public void UpdateRecipe(Recipe recipeNew)
+        public void UpdateRecipe(int id, Recipe recipeNew)
             {
-                Recipe recipe = new Recipe();
-                recipe = GetRecipeById(recipeNew.Id);
-                recipe.Name = recipeNew.Name; //składniki 
+            Recipe recipe = GetRecipeById(id);
 
+            recipe.Name = recipeNew.Name;
+            recipe.Description = recipeNew.Description;
 
             }
         

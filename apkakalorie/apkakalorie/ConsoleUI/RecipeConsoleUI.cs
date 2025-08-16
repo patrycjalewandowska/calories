@@ -64,11 +64,39 @@ namespace apkakalorie.ConsoleUI
             recipeService.DeleteRecipe(id);
         }
 
-        public static void UpdateRecipeFromUser()
+        public static void UpdateRecipeFromUser(ServiceRecipe recipeService, ServiceMenu serviceMenu, ServiceProduct productService)
         { 
+            Recipe recipe = new Recipe();
+            GetAllRecipe(recipeService);
+            int recipeId = GetIdFromUser();
+                       
+            ShowRecipe(recipeService.GetRecipeById(recipeId), productService);
+
+            serviceMenu.ShowMenu();
+            int input = GetIdFromUser(); // zmiana nazwy na int
+
+            switch (input)
+            {
+                case 1: UpdateRecipeFromUser(recipeId, recipeService); break;
+                case 2: Console.WriteLine("Dodanie produktow"); break;
+                case 3: Console.WriteLine("Usuniecie produktow"); break;
+                case 4: Console.WriteLine("Aktualizacja produktu?????"); break;
+            }
+
             //menu change produkt -> edit produkt
             //menu change usunac produkt
             //menu dodac produkt        
+        }
+
+        public static void UpdateRecipeFromUser(int id, ServiceRecipe recipeService)
+        {
+            Recipe recipeNew = new Recipe();
+            Console.WriteLine("Zmiana nazwy przepisu");
+            recipeNew.Name = Console.ReadLine();
+            Console.WriteLine("Zmiana Opisu");
+            recipeNew.Description = Console.ReadLine();
+
+            recipeService.UpdateRecipe(id, recipeNew);
         }
 
         private static double ReadDoubleFromUser()
@@ -92,6 +120,31 @@ namespace apkakalorie.ConsoleUI
                 Console.WriteLine("Nieprawidłowa wartość. Spróbuj ponownie:");
             }
 
+        }
+
+        private static int GetIdFromUser()
+        {
+            string productIdInput = Console.ReadLine();
+            Int32.TryParse(productIdInput, out int productId);
+            return productId;
+        }
+
+        private static void ShowRecipe(Recipe recipeFromDb, ServiceProduct productService)
+        {
+               Console.WriteLine($"Id: {recipeFromDb.Id}," +
+                $"Nazwa: {recipeFromDb.Name}," +
+                $"Przygotowanie: {recipeFromDb.Description}+" +
+                $"Kalorie: {recipeFromDb.CaloricContent}+" +
+                $"Liczba procji: {recipeFromDb.NumberOfServings}+" +
+                $"Białko: {recipeFromDb.Protein} +" +
+                $"Tłuszcze: {recipeFromDb.Fat}+" +
+                $"Węglowodany: {recipeFromDb.Carbs}");
+
+            foreach (var product in recipeFromDb.listIdProductToRecipe)
+            {
+               Product p = productService.GetProduct(product.ProductId);
+               ProductConsoleUI.ShowProductShort(p);
+            }
         }
 
     }

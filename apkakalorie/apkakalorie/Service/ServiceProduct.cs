@@ -60,7 +60,6 @@ namespace apkakalorie.Service
 
             return _context.products.FirstOrDefault(p=> p.Id == id);
         }
-
         public List<Product> GetAllProducts()
         {
             if (_context.products == null)
@@ -69,7 +68,6 @@ namespace apkakalorie.Service
             }
             return _context.products;
         }
-
         public void UpdateProduct(int id, Product updateProduct)
         {
             Product product = GetProduct(id);
