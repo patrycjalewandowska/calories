@@ -69,23 +69,22 @@ namespace apkakalorie.ConsoleUI
             Recipe recipe = new Recipe();
             GetAllRecipe(recipeService);
             int recipeId = GetIdFromUser();
-                       
-            ShowRecipe(recipeService.GetRecipeById(recipeId), productService);
+            recipe = recipeService.GetRecipeById(recipeId)
+            ShowRecipe(recipe, productService);
 
             serviceMenu.ShowMenu();
-            int input = GetIdFromUser(); // zmiana nazwy na int
+            int input = ReadIntFromUser(); // zmiana nazwy na int jedna metoda
 
             switch (input)
             {
                 case 1: UpdateRecipeFromUser(recipeId, recipeService); break;
                 case 2: Console.WriteLine("Dodanie produktow"); break;
-                case 3: Console.WriteLine("Usuniecie produktow"); break;
+                case 3: DeleteIdProductFromRecipe(recipeId, recipe.listIdProductToRecipe, productService,  recipeService); break;
                 case 4: Console.WriteLine("Aktualizacja produktu?????"); break;
             }
 
-            //menu change produkt -> edit produkt
-            //menu change usunac produkt
-            //menu dodac produkt        
+            //menu change produkt -> edit produkt -> dodac metode w prdukt service
+              
         }
 
         public static void UpdateRecipeFromUser(int id, ServiceRecipe recipeService)
@@ -97,6 +96,26 @@ namespace apkakalorie.ConsoleUI
             recipeNew.Description = Console.ReadLine();
 
             recipeService.UpdateRecipe(id, recipeNew);
+        }
+
+        public static void DeleteIdProductFromRecipe(int idRecipe,List<RecipeItem> listProducts, ServiceProduct productService, ServiceRecipe recipeService)
+        {
+            Console.WriteLine("Produkty w przepisie:");
+
+            foreach (var p in listProducts)
+            {
+                var product = productService.GetProductById(p.ProductId);
+
+                if (product != null)
+                {
+                    ProductConsoleUI.ShowProductShort(product);
+                }
+            }
+            
+            Console.WriteLine("Jaki produkt chcesz usunac z listy?");
+            int idProduct = ReadIntFromUser();
+
+            recipeService.DeleteProductFromRecipe(idProduct, idRecipe);
         }
 
         private static double ReadDoubleFromUser()

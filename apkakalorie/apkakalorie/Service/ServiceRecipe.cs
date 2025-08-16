@@ -89,6 +89,21 @@ namespace apkakalorie.Service
 
             }
 
+        public void DeleteProductFromRecipe(int idProduct, int idRecipe)
+        {
+            var recipe = _context.recipes.FirstOrDefault(r => r.Id == idRecipe);
+            if (recipe != null)
+            {
+                var product = recipe.listIdProductToRecipe
+                                    .FirstOrDefault(p => p.ProductId == idProduct);
+
+                if (product != null)
+                {
+                    recipe.listIdProductToRecipe.Remove(product);
+                }
+            }
+        }
+
         public void UpdateRecipe(int id, Recipe recipeNew)
             {
             Recipe recipe = GetRecipeById(id);

@@ -110,7 +110,7 @@ namespace apkakalorie.ConsoleUI
 
         public static void ShowProductShort(Product product)
         {
-                Console.WriteLine($"{product.Id}: {product.Name} - {product.CaloriesPer100g} kcal");
+                Console.WriteLine($"{product.Id}: {product.Name}");
         }
 
         private static int GetIdFromUser()

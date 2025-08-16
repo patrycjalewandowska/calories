@@ -68,6 +68,12 @@ namespace apkakalorie.Service
             }
             return _context.products;
         }
+        public Product GetProductById(int id) {
+
+            Product product = _context.products.FirstOrDefault(p => p.Id == id);
+
+            return product;
+        }
         public void UpdateProduct(int id, Product updateProduct)
         {
             Product product = GetProduct(id);
