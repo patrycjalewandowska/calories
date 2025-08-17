@@ -69,7 +69,7 @@ namespace apkakalorie.ConsoleUI
             Recipe recipe = new Recipe();
             GetAllRecipe(recipeService);
             int recipeId = GetIdFromUser();
-            recipe = recipeService.GetRecipeById(recipeId)
+            recipe = recipeService.GetRecipeById(recipeId);
             ShowRecipe(recipe, productService);
 
             serviceMenu.ShowMenu();
@@ -78,7 +78,7 @@ namespace apkakalorie.ConsoleUI
             switch (input)
             {
                 case 1: UpdateRecipeFromUser(recipeId, recipeService); break;
-                case 2: Console.WriteLine("Dodanie produktow"); break;
+                case 2: AddProductFromUser(recipeService, recipeId); break;
                 case 3: DeleteIdProductFromRecipe(recipeId, recipe.listIdProductToRecipe, productService,  recipeService); break;
                 case 4: Console.WriteLine("Aktualizacja produktu?????"); break;
             }
@@ -86,8 +86,20 @@ namespace apkakalorie.ConsoleUI
             //menu change produkt -> edit produkt -> dodac metode w prdukt service
               
         }
+        private static void AddProductFromUser(ServiceRecipe recipeService, int IdReicpe) 
+        {
+            Console.WriteLine("Jaki produky chcesz dodac do produktu? Podaj jego id.");
+            RecipeItem recipeItem = new RecipeItem();
 
-        public static void UpdateRecipeFromUser(int id, ServiceRecipe recipeService)
+            recipeItem.ProductId = GetIdFromUser();
+
+            Console.WriteLine("Podaj wage produktu w gramach:");
+            recipeItem.Quantity = ReadDoubleFromUser();
+
+            recipeService.AddAdditionalProductToRecipe(recipeItem, IdReicpe);
+
+        }
+        private static void UpdateRecipeFromUser(int id, ServiceRecipe recipeService)
         {
             Recipe recipeNew = new Recipe();
             Console.WriteLine("Zmiana nazwy przepisu");
@@ -97,14 +109,14 @@ namespace apkakalorie.ConsoleUI
 
             recipeService.UpdateRecipe(id, recipeNew);
         }
-
-        public static void DeleteIdProductFromRecipe(int idRecipe,List<RecipeItem> listProducts, ServiceProduct productService, ServiceRecipe recipeService)
+        // po update back to reipe menu
+        private static void DeleteIdProductFromRecipe(int idRecipe,List<RecipeItem> listProducts, ServiceProduct productService, ServiceRecipe recipeService)
         {
             Console.WriteLine("Produkty w przepisie:");
 
             foreach (var p in listProducts)
             {
-                var product = productService.GetProductById(p.ProductId);
+                var product = productService.GetProductById(p.ProductId); 
 
                 if (product != null)
                 {
@@ -117,7 +129,6 @@ namespace apkakalorie.ConsoleUI
 
             recipeService.DeleteProductFromRecipe(idProduct, idRecipe);
         }
-
         private static double ReadDoubleFromUser()
         {
             while (true)
@@ -128,7 +139,6 @@ namespace apkakalorie.ConsoleUI
                 Console.WriteLine("Nieprawidłowa wartość. Spróbuj ponownie:");
             }
         }
-
         private static int ReadIntFromUser()
         {
             while (true)
@@ -140,7 +150,6 @@ namespace apkakalorie.ConsoleUI
             }
 
         }
-
         private static int GetIdFromUser()
         {
             string productIdInput = Console.ReadLine();

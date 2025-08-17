@@ -54,6 +54,17 @@ namespace apkakalorie.Service
             Console.WriteLine("Dodano przepis");
         }
 
+        public void AddAdditionalProductToRecipe(RecipeItem recipeItem, int idRecipe) {
+
+            foreach (var recipe in _context.recipes)
+            {
+                if (recipe.Id == idRecipe)
+                {
+                    recipe.listIdProductToRecipe.Add(recipeItem);
+                }
+            }
+        }
+
         public void DeleteRecipe(int id)
         {
             Recipe recipe = new Recipe();
