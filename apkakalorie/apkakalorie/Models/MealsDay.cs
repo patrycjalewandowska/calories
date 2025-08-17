@@ -12,9 +12,10 @@ namespace apkakalorie.Models
         public int BreakfastId { get; set; }
         public int BreakfastSecondId { get; set; }
         public int LunchId { get; set; }
-
         public int TeaId { get; set; }
         public int DinnerId { get; set; }
+
+        public int Day; // enum?
 
 
     }
